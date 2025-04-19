@@ -23,11 +23,11 @@ An eCommerce platform for buying and selling products online. This project is de
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/aniruddha1295/ecommerce-website.git
+   git clone https://github.com/hedauav/e-commerce-flask.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd ecommerce-website
+   cd e-commerce-flask
    ```
 3. Set up a virtual environment:
    ```bash
