@@ -94,31 +94,8 @@ ecommerce-website/
 
 ```
 
-## Contributing
 
-Contributions are welcome! Please follow these steps:
 
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add feature-name"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Create a pull request.
 
-## License
 
-This project is licensed under the [MIT License](LICENSE).
 
-## Contact
-
-For any inquiries or feedback, feel free to reach out:
-
-- **GitHub**: [aniruddha1295](https://github.com/aniruddha1295)
