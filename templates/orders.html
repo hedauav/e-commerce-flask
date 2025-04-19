@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}My Orders - Happy Store{% endblock %}
+
+{% block content %}
+<h2>My Orders</h2>
+<hr>
+
+{% if orders %}
+<div class="accordion" id="ordersAccordion">
+    {% for order in orders %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#order{{ order.id }}">
+                Order #{{ order.id }} - {{ order.order_date }} 
+                ({{ order.status|capitalize }})
+            </button>
+        </h2>
+        <div id="order{{ order.id }}" class="accordion-collapse collapse" data-bs-parent="#ordersAccordion">
+            <div class="accordion-body">
+                <div class="mb-3">
+                    <h5>Order Details</h5>
+                    <p><strong>Date:</strong> {{ order.order_date }}</p>
+                    <p><strong>Status:</strong> <span class="badge {% if order.status == 'completed' %}bg-success{% elif order.status == 'pending' %}bg-warning{% else %}bg-info{% endif %}">{{ order.status|capitalize }}</span></p>
+                    <p><strong>Total:</strong> ${{ "%.2f"|format(order.total) }}</p>
+                    <p><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+                </div>
+                
+                <h5>Items</h5>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order_items_map[order.id] %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>${{ "%.2f"|format(item.price) }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ "%.2f"|format(item.price * item.quantity) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                                <td><strong>${{ "%.2f"|format(order.total) }}</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+    You haven't placed any orders yet. <a href="{{ url_for('products') }}">Start shopping</a>.
+</div>
+{% endif %}
+
+{% endblock %}

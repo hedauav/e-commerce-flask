@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Happy Store{% endblock %}
+
+{% block content %}
+<{% block hero %}
+<section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/banners/hero-banner.jpg') }}');">
+  <div class="hero-content">
+    <span class="subtitle">Welcome to our store</span>
+    <h2>Find Your Perfect Style</h2>
+    <p>Discover amazing products at great prices</p>
+    <div class="hero-buttons">
+      <a href="{{ url_for('products') }}" class="btn outline-btn">Shop Now</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+<section class="mt-5">
+    <h2 class="mb-4">Featured Products</h2>
+    <div class="row">
+        {% for product in featured_products %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="{{ url_for('static', filename='images/' + product.image) if product.image else 'https://via.placeholder.com/150' }}" 
+                     class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text text-truncate">{{ product.description }}</p>
+                    <p class="card-text text-primary fw-bold">${{ "%.2f"|format(product.price) }}</p>
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="mt-5">
+    <h2 class="mb-4">Categories</h2>
+    <div class="row">
+        {% for category in categories %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{{ category.name }}</h5>
+                    <a href="{{ url_for('products', category=category.id) }}" class="btn btn-primary">Browse {{ category.name }}</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
