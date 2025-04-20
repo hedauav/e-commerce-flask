@@ -87,7 +87,6 @@ ecommerce-website/
 │── db.py   
 │   
 │   
-├── .env
 ├── requirements.txt
 
 ```
